@@ -1,5 +1,9 @@
 {
-	"name": "client",
+	"name": "quick-rate-client",
+	"author": {
+		"email": "game.gt.tutor@gmail.com",
+		"name": "Danil Chernenko"
+	},
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
