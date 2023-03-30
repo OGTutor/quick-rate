@@ -10,7 +10,7 @@ export enum TopLevelCategory {
 	Products,
 }
 
-export class Dice {
+export class DiceData {
 	@Prop()
 	count: number;
 
@@ -24,7 +24,7 @@ export class Dice {
 	seniorSalary: number;
 }
 
-export class Advantages {
+export class TopPageAdvantage {
 	@Prop()
 	title: string;
 
@@ -34,11 +34,14 @@ export class Advantages {
 
 @Schema({ timestamps: true })
 export class TopPage {
-	@Prop()
+	@Prop({ enum: TopLevelCategory })
 	firstCategory: TopLevelCategory;
 
 	@Prop()
 	secondCategory: string;
+
+	@Prop({ unique: true })
+	alias: string;
 
 	@Prop()
 	title: string;
@@ -46,11 +49,11 @@ export class TopPage {
 	@Prop()
 	category: string;
 
-	@Prop()
-	dice?: Dice;
+	@Prop({ type: DiceData })
+	dice?: DiceData;
 
 	@Prop()
-	advantages: Advantages[];
+	advantages: TopPageAdvantage[];
 
 	@Prop()
 	seoText: string;
@@ -58,7 +61,7 @@ export class TopPage {
 	@Prop()
 	tagsTitle: string;
 
-	@Prop()
+	@Prop({ type: [String] })
 	tags: string[];
 }
 
