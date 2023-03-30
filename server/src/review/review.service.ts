@@ -4,6 +4,10 @@ import { Model, Types } from 'mongoose';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { Review, ReviewDocument } from './schema/review.schema';
 
+class Leak {}
+
+const leaks = [];
+
 @Injectable()
 export class ReviewService {
 	constructor(
@@ -20,6 +24,7 @@ export class ReviewService {
 	}
 
 	async findByProductId(productId: Types.ObjectId) {
+		leaks.push(new Leak());
 		return this.ReviewModel.find({ productId }).exec();
 	}
 
