@@ -1,1 +1,1 @@
-export const REVIEW_NOT_FOUND = 'Review with this id was not found!';
+export const REVIEW_NOT_FOUND = 'Review not found!';
