@@ -5,10 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { getMongoDbConfig } from './config/mongo.config';
+import { FilesModule } from './files/files.module';
 import { ProductModule } from './product/product.module';
 import { ReviewModule } from './review/review.module';
+import { TelegramModule } from './telegram/telegram.module';
 import { TopPageModule } from './top-page/top-page.module';
-import { FilesModule } from './files/files.module';
 
 @Module({
 	imports: [
@@ -23,6 +24,7 @@ import { FilesModule } from './files/files.module';
 		ProductModule,
 		ReviewModule,
 		FilesModule,
+		TelegramModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
