@@ -27,13 +27,25 @@ export class TopPageService {
 		return this.TopPageModel.findOne({ alias }).exec();
 	}
 
+	async findAll() {
+		return this.TopPageModel.find({}).exec();
+	}
+
 	async findByCategory(firstCategory: TopLevelCategory) {
 		return this.TopPageModel.aggregate()
 			.match({ firstCategory })
 			.group({
 				_id: { secondCategory: '$secondCategory' },
-				pages: { $push: { alias: '$alias', title: '$title' } },
+				pages: {
+					$push: {
+						alias: '$alias',
+						title: '$title',
+						_id: '$_id',
+						category: '$category',
+					},
+				},
 			})
+			.sort({ _id: 1 })
 			.exec();
 	}
 
