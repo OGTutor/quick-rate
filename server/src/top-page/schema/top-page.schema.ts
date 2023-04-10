@@ -53,10 +53,10 @@ export class TopPage {
 	dice?: DiceData;
 
 	@Prop()
-	advantages: TopPageAdvantage[];
+	advantages?: TopPageAdvantage[];
 
 	@Prop()
-	seoText: string;
+	seoText?: string;
 
 	@Prop()
 	tagsTitle: string;

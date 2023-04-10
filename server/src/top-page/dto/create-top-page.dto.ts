@@ -54,16 +54,19 @@ export class CreateTopPageDto {
 	category: string;
 
 	@IsOptional()
+	@ValidateNested()
 	@Type(() => DiceDataDto)
 	dice?: DiceDataDto;
 
 	@IsArray()
+	@IsOptional()
 	@ValidateNested()
 	@Type(() => TopPageAdvantageDto)
-	advantages: TopPageAdvantageDto[];
+	advantages?: TopPageAdvantageDto[];
 
 	@IsString()
-	seoText: string;
+	@IsOptional()
+	seoText?: string;
 
 	@IsString()
 	tagsTitle: string;
