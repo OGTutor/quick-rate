@@ -6,7 +6,9 @@ import Paragraph from '@/components/ui/paragraph/Paragraph';
 import Rating from '@/components/ui/rating/Rating';
 import Tag from '@/components/ui/tag/Tag';
 
-const Home: FC = () => {
+import { IHome } from './home.interface';
+
+const Home: FC<IHome> = ({ menu, firstCategory }) => {
 	const [rating, setRating] = useState<number>(4);
 
 	return (
@@ -50,6 +52,11 @@ const Home: FC = () => {
 				href="https://google.com"
 			/>
 			<Rating rating={rating} setRating={setRating} isEditable />
+			<ul>
+				{menu.map((m) => (
+					<li key={m._id.secondCategory}>{m._id.secondCategory}</li>
+				))}
+			</ul>
 		</>
 	);
 };
