@@ -1,5 +1,6 @@
 import { GetStaticProps, NextPage } from 'next';
 
+import { withLayout } from '@/components/layout/Layout';
 import Home from '@/components/screens/home/Home';
 import { IHome } from '@/components/screens/home/home.interface';
 
@@ -29,4 +30,4 @@ export const getStaticProps: GetStaticProps = async () => {
 	}
 };
 
-export default HomePage;
+export default withLayout(HomePage);
