@@ -2,29 +2,24 @@ import { firstLevelMenu } from 'helpers/helpers';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import { withLayout } from '@/components/layout/Layout';
-import Course from '@/components/screens/course/Course';
-import { ICoursePage } from '@/components/screens/course/course.interface';
+import TopPageComponent from '@/components/screens/top-page/TopPage';
+
+import { ITopPage } from '@/shared/interfaces/top-page.interface';
 
 import { ProductService } from '@/services/product/product.service';
 import { TopPageService } from '@/services/top-page/top-page.service';
 
-const CoursePage: NextPage<ICoursePage> = ({
-	firstCategory,
-	menu,
-	page,
-	products,
-}) => {
+const TopPage: NextPage<ITopPage> = ({ firstCategory, page, products }) => {
 	return (
-		<Course
+		<TopPageComponent
 			firstCategory={firstCategory}
-			menu={menu}
 			page={page}
 			products={products}
 		/>
 	);
 };
 
-export default withLayout(CoursePage);
+export default withLayout(TopPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	try {

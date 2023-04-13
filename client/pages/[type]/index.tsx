@@ -2,7 +2,8 @@ import { firstLevelMenu } from 'helpers/helpers';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import { withLayout } from '@/components/layout/Layout';
-import { ITypePage } from '@/components/screens/course/type.interface';
+
+import { ITypePage } from '@/shared/interfaces/type.interface';
 
 import { TopPageService } from '@/services/top-page/top-page.service';
 

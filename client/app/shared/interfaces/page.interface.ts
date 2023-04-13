@@ -6,10 +6,10 @@ export enum TopLevelCategory {
 }
 
 export interface DiceData {
-	count: number;
-	juniorSalary: number;
-	middleSalary: number;
-	seniorSalary: number;
+	count?: number;
+	juniorSalary?: number;
+	middleSalary?: number;
+	seniorSalary?: number;
 }
 
 export interface PageAdvantage {

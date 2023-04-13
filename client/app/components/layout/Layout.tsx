@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { AppContextProvider } from 'providers/AppContextProvider/AppContextProvider';
 import { FC, PropsWithChildren } from 'react';
 
-import { ICoursePage } from '../screens/course/course.interface';
+import { ICoursePage } from '../screens/top-page/TopPage.interface';
 
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
