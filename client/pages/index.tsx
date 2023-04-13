@@ -1,3 +1,4 @@
+import { firstLevelMenu } from 'helpers/helpers';
 import { GetStaticProps, NextPage } from 'next';
 
 import { withLayout } from '@/components/layout/Layout';
@@ -10,14 +11,19 @@ const HomePage: NextPage<IHome> = ({ menu, firstCategory }) => {
 	return <Home menu={menu} firstCategory={firstCategory} />;
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export default withLayout(HomePage);
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
 	try {
-		const { menu, firstCategory } = await TopPageService.getMenu();
+		const firstCategoryItem = firstLevelMenu.find(
+			(menu) => menu.route === params?.type
+		);
+		const { menu } = await TopPageService.getMenu(firstCategoryItem?.id);
 
 		return {
 			props: {
 				menu,
-				firstCategory,
+				firstCategory: firstCategoryItem?.id,
 			} as IHome,
 		};
 	} catch (error) {
@@ -29,5 +35,3 @@ export const getStaticProps: GetStaticProps = async () => {
 		};
 	}
 };
-
-export default withLayout(HomePage);

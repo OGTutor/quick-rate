@@ -1,5 +1,7 @@
+import { firstLevelMenu } from 'helpers/helpers';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
+import { withLayout } from '@/components/layout/Layout';
 import Course from '@/components/screens/course/Course';
 import { ICoursePage } from '@/components/screens/course/course.interface';
 
@@ -22,12 +24,20 @@ const CoursePage: NextPage<ICoursePage> = ({
 	);
 };
 
+export default withLayout(CoursePage);
+
 export const getStaticPaths: GetStaticPaths = async () => {
 	try {
-		const { menu, firstCategory } = await TopPageService.getMenu();
-		const paths = menu.flatMap((m) =>
-			m.pages.map((p) => '/courses/' + p.alias)
-		);
+		let paths: string[] = [];
+
+		for (const m of firstLevelMenu) {
+			const { menu } = await TopPageService.getMenu(m.id);
+			paths = paths.concat(
+				menu.flatMap((s) =>
+					s.pages.map((p) => `/${m.route}/${p.alias}`)
+				)
+			);
+		}
 
 		return {
 			paths,
@@ -43,12 +53,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	try {
-		const { menu, firstCategory } = await TopPageService.getMenu();
+		const firstCategoryItem = firstLevelMenu.find(
+			(menu) => menu.route === params?.type
+		);
+		const { menu } = await TopPageService.getMenu(firstCategoryItem?.id);
+		if (menu.length === 0) {
+			return {
+				notFound: true,
+			};
+		}
 		const { page } = await TopPageService.getPage(String(params?.alias));
 		const { products } = await ProductService.find(page.category);
 
 		return {
-			props: { menu, firstCategory, page, products },
+			props: {
+				menu,
+				firstCategory: firstCategoryItem?.id,
+				page,
+				products,
+			},
 		};
 	} catch (error) {
 		return {
@@ -56,5 +79,3 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		};
 	}
 };
-
-export default CoursePage;

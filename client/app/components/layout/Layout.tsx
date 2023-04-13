@@ -1,6 +1,9 @@
 import { IAppContext } from 'context/context.interface';
+import { NextPage } from 'next';
 import { AppContextProvider } from 'providers/AppContextProvider/AppContextProvider';
 import { FC, PropsWithChildren } from 'react';
+
+import { ICoursePage } from '../screens/course/course.interface';
 
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
@@ -18,7 +21,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 	);
 };
 
-export const withLayout = <T extends Record<string, unknown> & IAppContext>(
+export const withLayout = <T extends NextPage & IAppContext & ICoursePage>(
 	Component: FC<T>
 ) => {
 	return function withLayoutComponent(props: T) {

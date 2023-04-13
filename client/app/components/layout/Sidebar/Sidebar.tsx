@@ -1,12 +1,18 @@
+import cn from 'classnames';
 import { FC } from 'react';
+
+import Logo from '@/assets/images/logo.svg';
 
 import Menu from '../Menu/Menu';
 
 import { ISidebar } from './Sidebar.interface';
+import styles from './Sidebar.module.css';
 
-const Sidebar: FC<ISidebar> = ({ ...rest }) => {
+const Sidebar: FC<ISidebar> = ({ className, ...rest }) => {
 	return (
-		<div {...rest}>
+		<div className={cn(className, styles.sidebar)} {...rest}>
+			<Logo className={styles.logo} />
+			<div>Search</div>
 			<Menu />
 		</div>
 	);

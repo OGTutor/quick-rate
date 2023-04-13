@@ -1,52 +1,34 @@
 import cn from 'classnames';
 import { AppContext } from 'context/app.context';
+import { firstLevelMenu } from 'helpers/helpers';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FC, useContext } from 'react';
-
-import { IFirstLevelMenu } from '@/shared/interfaces/menu.interface';
-import { TopLevelCategory } from '@/shared/interfaces/page.interface';
-
-import BooksIcon from '@/assets/images/MenuIcons/books.svg';
-import CoursesIcon from '@/assets/images/MenuIcons/courses.svg';
-import ProductsIcon from '@/assets/images/MenuIcons/products.svg';
-import ServicesIcon from '@/assets/images/MenuIcons/services.svg';
 
 import styles from './Menu.module.css';
 
-const firstLevelMenu: IFirstLevelMenu[] = [
-	{
-		route: 'courses',
-		name: 'Courses',
-		icon: <CoursesIcon />,
-		id: TopLevelCategory.Courses,
-	},
-	{
-		route: 'services',
-		name: 'Services',
-		icon: <ServicesIcon />,
-		id: TopLevelCategory.Services,
-	},
-	{
-		route: 'books',
-		name: 'Books',
-		icon: <BooksIcon />,
-		id: TopLevelCategory.Books,
-	},
-	{
-		route: 'products',
-		name: 'Products',
-		icon: <ProductsIcon />,
-		id: TopLevelCategory.Products,
-	},
-];
-
 const Menu: FC = () => {
 	const { menu, setMenu, firstCategory } = useContext(AppContext);
+	const router = useRouter();
+
+	const openSecondLevel = (secondCategory: string) => {
+		setMenu &&
+			setMenu(
+				menu.map((m) => {
+					if (m._id.secondCategory === secondCategory) {
+						m.isOpened = !m.isOpened;
+					}
+					return m;
+				})
+			);
+	};
 
 	return (
 		<nav className={styles.menu}>
+			{/* FirstLevelMenu */}
 			{firstLevelMenu.map((menuFirst) => (
 				<div key={menuFirst.route}>
-					<a href={`/${menuFirst.route}`}>
+					<Link href={`/${menuFirst.route}`}>
 						<div
 							className={cn(styles.firstLevel, {
 								[styles.firstLevelActive]:
@@ -56,41 +38,63 @@ const Menu: FC = () => {
 							{menuFirst.icon}
 							<span>{menuFirst.name}</span>
 						</div>
-					</a>
+					</Link>
 					{menuFirst.id === firstCategory && (
+						// SecondLevelMenu
 						<div className={styles.secondBlock}>
-							{menu.map((menuSecond) => (
-								<div key={menuSecond._id.secondCategory}>
-									<div className={styles.secondLevel}>
-										{menuSecond._id.secondCategory}
+							{menu.map((menuSecond) => {
+								if (
+									menuSecond.pages
+										.map((page) => page.alias)
+										.includes(router.asPath.split('/')[2])
+								) {
+									menuSecond.isOpened = true;
+								}
+								return (
+									<div key={menuSecond._id.secondCategory}>
 										<div
-											className={cn(
-												styles.secondLevelBlock,
-												{
-													[styles.secondLevelBlockOpened]:
-														menuSecond.isOpened,
-												}
-											)}
+											className={styles.secondLevel}
+											onClick={() =>
+												openSecondLevel(
+													menuSecond._id
+														.secondCategory
+												)
+											}
 										>
-											{menuSecond.pages.map((page) => (
-												<a
-													href={`/${menuFirst.route}/${page.alias}`}
-													className={cn(
-														styles.thirdLevel,
-														{
-															[styles.thirdLevelActive]:
-																false,
-														}
-													)}
-													key={page._id}
-												>
-													{page.category}
-												</a>
-											))}
+											{menuSecond._id.secondCategory}
+											<div
+												className={cn(
+													styles.secondLevelBlock,
+													{
+														[styles.secondLevelBlockOpened]:
+															menuSecond.isOpened,
+													}
+												)}
+											>
+												{/* ThirdLevelMenu */}
+												{menuSecond.pages.map(
+													(page) => (
+														<Link
+															href={`/${menuFirst.route}/${page.alias}`}
+															className={cn(
+																styles.thirdLevel,
+																{
+																	[styles.thirdLevelActive]:
+																		`/${menuFirst.route}/${page.alias}` ===
+																		router.asPath,
+																}
+															)}
+															key={page._id}
+														>
+															{page.category}
+														</Link>
+													)
+												)}
+											</div>
 										</div>
 									</div>
-								</div>
-							))}
+								);
+							})}
 						</div>
 					)}
 				</div>
