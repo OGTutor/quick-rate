@@ -21,6 +21,7 @@ export interface IProduct {
 	advantages: string;
 	disAdvantages: string;
 	categories: string[];
+	initialRating: number;
 	tags: string[];
 	characteristics: ProductCharacteristic[];
 	reviews: Review[];

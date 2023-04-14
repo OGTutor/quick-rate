@@ -11,7 +11,7 @@ import styles from './Sidebar.module.css';
 const Sidebar: FC<ISidebar> = ({ className, ...rest }) => {
 	return (
 		<div className={cn(className, styles.sidebar)} {...rest}>
-			<Logo className={styles.logo} />
+			<Logo />
 			<div>Search</div>
 			<Menu />
 		</div>

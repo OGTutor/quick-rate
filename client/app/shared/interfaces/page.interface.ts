@@ -13,6 +13,7 @@ export interface DiceData {
 }
 
 export interface PageAdvantage {
+	_id: string;
 	title: string;
 	description: string;
 }

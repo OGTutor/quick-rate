@@ -1,11 +1,11 @@
+/* stylelint-disable */
 .wrapper {
-	/* stylelint-disable */
 	display: grid;
 	grid-template-columns: auto 230px minmax(320px, 1200px) auto;
 	grid-template-rows: auto 1fr auto;
 
 	min-height: 100vh;
-	gap: 0 30px;
+	gap: 40px 30px;
 
 	grid-template-areas:
 		'. header header .'
@@ -42,6 +42,10 @@
 
 	.sidebar {
 		display: none !important;
+	}
+
+	.body {
+		padding: 15px;
 	}
 
 	.header {
