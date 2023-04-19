@@ -9,7 +9,7 @@ const Advantages: FC<IAdvantages> = ({ advantages }) => {
 	return (
 		<>
 			{advantages.map((advantage) => (
-				<div key={advantage._id} className={styles.advantage}>
+				<div key={advantage.title} className={styles.advantage}>
 					<CheckIcon />
 					<div className={styles.title}>{advantage.title}</div>
 					<hr className={styles.verticalLine} />

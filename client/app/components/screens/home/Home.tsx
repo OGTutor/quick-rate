@@ -2,9 +2,12 @@ import { FC, useState } from 'react';
 
 import Button from '@/components/ui/button/Button';
 import Heading from '@/components/ui/heading/Heading';
+import Input from '@/components/ui/input/Input';
 import Paragraph from '@/components/ui/paragraph/Paragraph';
 import Rating from '@/components/ui/rating/Rating';
+import Search from '@/components/ui/search/Search';
 import Tag from '@/components/ui/tag/Tag';
+import Textarea from '@/components/ui/textarea/Textarea';
 
 import { IHome } from './home.interface';
 
@@ -57,6 +60,9 @@ const Home: FC<IHome> = ({ menu, firstCategory }) => {
 					<li key={m._id.secondCategory}>{m._id.secondCategory}</li>
 				))}
 			</ul>
+			<Input placeholder="test" />
+			<Textarea placeholder="test area" />
+			<Search />
 		</>
 	);
 };

@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import { FC } from 'react';
 
+import Search from '@/components/ui/search/Search';
+
 import Logo from '@/assets/images/logo.svg';
 
 import Menu from '../Menu/Menu';
@@ -12,7 +14,7 @@ const Sidebar: FC<ISidebar> = ({ className, ...rest }) => {
 	return (
 		<div className={cn(className, styles.sidebar)} {...rest}>
 			<Logo />
-			<div>Search</div>
+			<Search />
 			<Menu />
 		</div>
 	);
