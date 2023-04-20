@@ -35,7 +35,7 @@ export class Product {
 	advantages: string;
 
 	@Prop()
-	disAdvantages: string;
+	disadvantages: string;
 
 	@Prop({ type: [String] })
 	categories: string[];
