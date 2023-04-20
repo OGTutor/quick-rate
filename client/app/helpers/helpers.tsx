@@ -38,3 +38,7 @@ export const priceEn = (price: number | undefined) =>
 		?.toString()
 		.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 		.concat(' $');
+
+export const declOfNum = (number: number, titles: [string, string]) => {
+	return titles[number > 1 ? 0 : number === 1 ? 1 : 0];
+};

@@ -3,6 +3,7 @@ import { FC, useReducer } from 'react';
 import Advantages from '@/components/ui/advantages/Advantages';
 import DiceData from '@/components/ui/dice-data/DiceData';
 import Heading from '@/components/ui/heading/Heading';
+import Product from '@/components/ui/product/Product';
 import Sorting from '@/components/ui/sorting/Sorting';
 import { SortEnum } from '@/components/ui/sorting/Sorting.interface';
 import Tag from '@/components/ui/tag/Tag';
@@ -39,7 +40,7 @@ const TopPageComponent: FC<ITopPageComponent> = ({
 			<div>
 				{sortedProducts &&
 					sortedProducts.map((product) => (
-						<div key={product._id}>{product.title}</div>
+						<Product key={product._id} product={product} />
 					))}
 			</div>
 			<div className={styles.diceTitle}>

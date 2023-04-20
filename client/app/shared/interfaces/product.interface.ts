@@ -19,7 +19,7 @@ export interface IProduct {
 	credit: number;
 	description: string;
 	advantages: string;
-	disAdvantages: string;
+	disadvantages: string;
 	categories: string[];
 	initialRating: number;
 	tags: string[];

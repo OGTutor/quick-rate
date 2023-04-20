@@ -11,6 +11,7 @@ const Tag: FC<ITag> = ({
 	color = 'ghost',
 	href,
 	className,
+	children,
 	...rest
 }) => {
 	return (
@@ -26,7 +27,7 @@ const Tag: FC<ITag> = ({
 			})}
 			{...rest}
 		>
-			{href ? <Link href={href}>{text}</Link> : <>{text}</>}
+			{href ? <Link href={href}>{text}</Link> : <>{text || children}</>}
 		</div>
 	);
 };
