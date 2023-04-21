@@ -1,11 +1,19 @@
 import cn from 'classnames';
-import { FC } from 'react';
+import { forwardRef } from 'react';
 
 import { ITextarea } from './Textarea.interface';
 import styles from './Textarea.module.css';
 
-const Textarea: FC<ITextarea> = ({ className, ...rest }) => {
-	return <textarea className={cn(className, styles.textarea)} {...rest} />;
-};
+const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
+	({ className, ...rest }, ref) => {
+		return (
+			<textarea
+				className={cn(className, styles.textarea)}
+				ref={ref}
+				{...rest}
+			/>
+		);
+	}
+);
 
 export default Textarea;

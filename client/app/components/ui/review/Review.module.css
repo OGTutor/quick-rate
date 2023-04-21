@@ -3,16 +3,10 @@
 
 	align-items: center;
 
-	margin-top: 30px;
-
 	font-size: 14px;
 	line-height: 24px;
 	grid-template-columns: [start] auto 1fr auto auto [end];
 	gap: 10px;
-}
-
-.review:first-child {
-	margin-top: 0;
 }
 
 .name {

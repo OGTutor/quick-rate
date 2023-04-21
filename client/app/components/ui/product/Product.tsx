@@ -7,6 +7,7 @@ import Button from '../button/Button';
 import Card from '../card/Card';
 import Divider from '../divider/Divider';
 import Rating from '../rating/Rating';
+import ReviewForm from '../review-form/ReviewForm';
 import Review from '../review/Review';
 import Tag from '../tag/Tag';
 
@@ -116,8 +117,12 @@ const Product: FC<IProductCard> = ({ className, product, ...rest }) => {
 				})}
 			>
 				{product.reviews.map((review) => (
-					<Review key={review._id} review={review} />
+					<div key={review._id}>
+						<Review review={review} />
+						<Divider />
+					</div>
 				))}
+				<ReviewForm productId={product._id} />
 			</Card>
 		</>
 	);
