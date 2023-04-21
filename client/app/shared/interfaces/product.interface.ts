@@ -4,10 +4,12 @@ export interface ProductCharacteristic {
 }
 
 export interface Review {
+	_id: string;
 	name: string;
 	title: string;
 	description: string;
 	rating: number;
+	createdAt: string;
 }
 
 export interface IProduct {
