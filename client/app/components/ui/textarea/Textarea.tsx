@@ -5,13 +5,20 @@ import { ITextarea } from './Textarea.interface';
 import styles from './Textarea.module.css';
 
 const Textarea = forwardRef<HTMLTextAreaElement, ITextarea>(
-	({ className, ...rest }, ref) => {
+	({ className, error, ...rest }, ref) => {
 		return (
-			<textarea
-				className={cn(className, styles.textarea)}
-				ref={ref}
-				{...rest}
-			/>
+			<div className={cn(styles.textareaWrapper, className)}>
+				<textarea
+					className={cn(styles.textarea, {
+						[styles.error]: error,
+					})}
+					ref={ref}
+					{...rest}
+				/>
+				{error && (
+					<span className={styles.errorMessage}>{error.message}</span>
+				)}
+			</div>
 		);
 	}
 );

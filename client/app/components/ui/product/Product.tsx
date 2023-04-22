@@ -97,16 +97,16 @@ const Product: FC<IProductCard> = ({ className, product, ...rest }) => {
 				<Divider className={cn(styles.hr, styles.hr2)} />
 				<div className={styles.actions}>
 					<Button appearance="primary">Learn more</Button>
-					{product.reviews.length > 0 && (
-						<Button
-							appearance="ghost"
-							arrow={isReviewOpened ? 'down' : 'right'}
-							className={styles.reviewButton}
-							onClick={() => setIsReviewOpened(!isReviewOpened)}
-						>
-							Read reviews
-						</Button>
-					)}
+					<Button
+						appearance="ghost"
+						arrow={isReviewOpened ? 'down' : 'right'}
+						className={styles.reviewButton}
+						onClick={() => setIsReviewOpened(!isReviewOpened)}
+					>
+						{product.reviews.length > 0
+							? 'Read reviews'
+							: 'Add review'}
+					</Button>
 				</div>
 			</Card>
 			<Card

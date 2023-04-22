@@ -7,7 +7,7 @@ import { IRating } from './Rating.interface';
 import styles from './Rating.module.css';
 
 const Rating = forwardRef<HTMLDivElement, IRating>(
-	({ rating, setRating, isEditable = false, ...rest }, ref) => {
+	({ rating, setRating, isEditable = false, error, ...rest }, ref) => {
 		const [ratingArray, setRatingArray] = useState<JSX.Element[]>(
 			new Array(5).fill(<></>)
 		);
@@ -64,10 +64,19 @@ const Rating = forwardRef<HTMLDivElement, IRating>(
 		};
 
 		return (
-			<div {...rest} ref={ref}>
+			<div
+				{...rest}
+				ref={ref}
+				className={cn(styles.ratingWrapper, {
+					[styles.error]: error,
+				})}
+			>
 				{ratingArray.map((rating, idx) => (
 					<span key={idx}>{rating}</span>
 				))}
+				{error && (
+					<span className={styles.errorMessage}>{error.message}</span>
+				)}
 			</div>
 		);
 	}

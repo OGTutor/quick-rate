@@ -30,7 +30,7 @@
 	white-space: nowrap;
 }
 
-.success {
+.panel {
 	position: relative;
 
 	margin-top: 20px;
@@ -38,8 +38,14 @@
 	padding: 20px;
 
 	border-radius: 10px;
+}
 
+.success {
 	background: var(--green-light);
+}
+
+.error {
+	background: var(--red-light);
 }
 
 .successTitle {
@@ -52,6 +58,10 @@
 	right: 20px;
 
 	cursor: pointer;
+}
+
+.error .close path {
+	stroke: var(--red);
 }
 
 @media (max-width: 1100px) {

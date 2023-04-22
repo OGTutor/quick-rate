@@ -33,6 +33,7 @@ const Search: FC<ISearch> = ({ className, ...rest }) => {
 				className={styles.input}
 				placeholder="Search..."
 				value={search}
+				typeOfInput="search"
 				onChange={(e) => setSearch(e.target.value)}
 				onKeyDown={handleKeyDown}
 			/>

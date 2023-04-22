@@ -60,7 +60,7 @@ const Home: FC<IHome> = ({ menu, firstCategory }) => {
 					<li key={m._id.secondCategory}>{m._id.secondCategory}</li>
 				))}
 			</ul>
-			<Input placeholder="test" />
+			<Input placeholder="test" typeOfInput="default" />
 			<Textarea placeholder="test area" />
 			<Search />
 		</>
