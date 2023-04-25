@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 
 import { useScrollY } from '@/hooks/useScrollY';
 
-import UpIcon from '@/assets/images/up.svg';
+import ButtonIcon from '../button-icon/ButtonIcon';
 
 import styles from './Up.module.css';
 
@@ -23,14 +23,13 @@ const Up: FC = () => {
 	};
 
 	return (
-		<motion.button
+		<motion.div
 			className={styles.up}
-			onClick={scrollToTop}
 			animate={controls}
 			initial={{ opacity: 0 }}
 		>
-			<UpIcon />
-		</motion.button>
+			<ButtonIcon appearance="primary" icon="up" onClick={scrollToTop} />
+		</motion.div>
 	);
 };
 
