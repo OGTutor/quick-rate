@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { declOfNum, priceEn } from 'helpers/helpers';
 import Image from 'next/image';
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 
 import Button from '../button/Button';
 import Card from '../card/Card';
@@ -16,9 +16,18 @@ import styles from './Product.module.css';
 
 const Product: FC<IProductCard> = ({ className, product, ...rest }) => {
 	const [isReviewOpened, setIsReviewOpened] = useState(false);
+	const reviewRef = useRef<null | HTMLDivElement>(null);
+
+	const scrollToReview = () => {
+		setIsReviewOpened(true);
+		reviewRef.current?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+		});
+	};
 
 	return (
-		<>
+		<div className={className} {...rest}>
 			<Card className={styles.product}>
 				<div className={styles.logo}>
 					<Image
@@ -59,8 +68,13 @@ const Product: FC<IProductCard> = ({ className, product, ...rest }) => {
 				<div className={styles.priceTitle}>price</div>
 				<div className={styles.creditTitle}>credit</div>
 				<div className={styles.ratingTitle}>
-					{product.reviewCount}
-					{declOfNum(product.reviewCount, [' reviews', ' review'])}
+					<a href="#ref" onClick={scrollToReview}>
+						{product.reviewCount}
+						{declOfNum(product.reviewCount, [
+							' reviews',
+							' review',
+						])}
+					</a>
 				</div>
 				<Divider className={styles.hr} />
 				<div className={styles.description}>{product.description}</div>
@@ -115,6 +129,7 @@ const Product: FC<IProductCard> = ({ className, product, ...rest }) => {
 					[styles.opened]: isReviewOpened,
 					[styles.closed]: !isReviewOpened,
 				})}
+				ref={reviewRef}
 			>
 				{product.reviews.map((review) => (
 					<div key={review._id}>
@@ -124,7 +139,7 @@ const Product: FC<IProductCard> = ({ className, product, ...rest }) => {
 				))}
 				<ReviewForm productId={product._id} />
 			</Card>
-		</>
+		</div>
 	);
 };
 
