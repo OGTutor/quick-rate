@@ -1,4 +1,4 @@
-import { FC, useReducer } from 'react';
+import { FC, useEffect, useReducer } from 'react';
 
 import Advantages from '@/components/ui/advantages/Advantages';
 import DiceData from '@/components/ui/dice-data/DiceData';
@@ -27,6 +27,10 @@ const TopPageComponent: FC<ITopPageComponent> = ({
 	const setSort = (sort: SortEnum) => {
 		dispatchSort({ type: sort });
 	};
+
+	useEffect(() => {
+		dispatchSort({ type: 'reset', initialState: products });
+	}, [products]);
 
 	return (
 		<div>
