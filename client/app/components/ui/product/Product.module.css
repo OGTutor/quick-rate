@@ -88,6 +88,7 @@
 .priceTitle,
 .creditTitle,
 .ratingTitle {
+	z-index: 100;
 	font-weight: 300;
 	font-size: 14px;
 	line-height: 19px;
@@ -144,19 +145,13 @@
 	margin-bottom: 5px;
 }
 
-.closed {
+.reviews {
 	overflow: hidden;
-	max-height: 0;
-	padding: 0;
-}
-
-.opened {
-	overflow: hidden;
-	max-height: auto;
 	padding: 30px;
 }
 
 .ratingTitle a {
+	cursor: pointer;
 	color: var(--primary);
 }
 

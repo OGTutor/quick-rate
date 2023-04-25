@@ -24,6 +24,11 @@ const Product = motion<IProductCard>(
 			const [isReviewOpened, setIsReviewOpened] = useState(false);
 			const reviewRef = useRef<null | HTMLDivElement>(null);
 
+			const variants = {
+				visible: { opacity: 1, height: 'auto' },
+				hidden: { opacity: 0, height: 0 },
+			};
+
 			const scrollToReview = () => {
 				setIsReviewOpened(true);
 				reviewRef.current?.scrollIntoView({
@@ -76,7 +81,7 @@ const Product = motion<IProductCard>(
 						<div className={styles.priceTitle}>price</div>
 						<div className={styles.creditTitle}>credit</div>
 						<div className={styles.ratingTitle}>
-							<a href="#ref" onClick={scrollToReview}>
+							<a onClick={scrollToReview}>
 								{product.reviewCount}
 								{declOfNum(product.reviewCount, [
 									' reviews',
@@ -145,22 +150,25 @@ const Product = motion<IProductCard>(
 							</Button>
 						</div>
 					</Card>
-					<Card
-						color="blue"
-						className={cn(styles.reviews, {
-							[styles.opened]: isReviewOpened,
-							[styles.closed]: !isReviewOpened,
-						})}
-						ref={reviewRef}
+					<motion.div
+						animate={isReviewOpened ? 'visible' : 'hidden'}
+						variants={variants}
+						initial="hidden"
 					>
-						{product.reviews.map((review) => (
-							<div key={review._id}>
-								<Review review={review} />
-								<Divider />
-							</div>
-						))}
-						<ReviewForm productId={product._id} />
-					</Card>
+						<Card
+							color="blue"
+							className={styles.reviews}
+							ref={reviewRef}
+						>
+							{product.reviews.map((review) => (
+								<div key={review._id}>
+									<Review review={review} />
+									<Divider />
+								</div>
+							))}
+							<ReviewForm productId={product._id} />
+						</Card>
+					</motion.div>
 				</div>
 			);
 		}
