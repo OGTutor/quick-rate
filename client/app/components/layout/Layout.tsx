@@ -3,7 +3,8 @@ import { NextPage } from 'next';
 import { AppContextProvider } from 'providers/AppContextProvider/AppContextProvider';
 import { FC, PropsWithChildren } from 'react';
 
-import { ICoursePage } from '../screens/top-page/TopPage.interface';
+import { ITopPageComponent } from '../screens/top-page/TopPage.interface';
+import Up from '../ui/up/Up';
 
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
@@ -17,11 +18,14 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 			<Sidebar className={styles.sidebar} />
 			<div className={styles.body}>{children}</div>
 			<Footer className={styles.footer} />
+			<Up />
 		</div>
 	);
 };
 
-export const withLayout = <T extends NextPage & IAppContext & ICoursePage>(
+export const withLayout = <
+	T extends NextPage & IAppContext & ITopPageComponent
+>(
 	Component: FC<T>
 ) => {
 	return function withLayoutComponent(props: T) {

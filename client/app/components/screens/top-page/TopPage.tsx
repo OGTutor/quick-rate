@@ -33,7 +33,7 @@ const TopPageComponent: FC<ITopPageComponent> = ({
 	}, [products]);
 
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<div className={styles.title}>
 				<Heading tag="h1" title={page.title} />
 				{products && (
@@ -44,7 +44,7 @@ const TopPageComponent: FC<ITopPageComponent> = ({
 			<div>
 				{sortedProducts &&
 					sortedProducts.map((product) => (
-						<Product key={product._id} product={product} />
+						<Product layout key={product._id} product={product} />
 					))}
 			</div>
 			<div className={styles.diceTitle}>
